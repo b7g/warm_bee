@@ -23,5 +23,4 @@ func _on_ButtonCreate_pressed() -> void:
 	if collection_name.empty():
 		return
 	Data.create_collection(collection_name)
-	_main.collection_added()
 	queue_free()

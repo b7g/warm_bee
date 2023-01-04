@@ -19,4 +19,4 @@ func set_entry(entry: Dictionary) -> void:
 
 
 func _on_EntryButton_pressed() -> void:
-	_main.display_entry_content(_entry["id"])
+	Data.select_entry_by_id(_entry["id"])
