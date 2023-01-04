@@ -68,6 +68,7 @@ margin_left = -123.0
 margin_top = 32.0
 margin_right = -32.0
 margin_bottom = 52.0
+grow_horizontal = 0
 text = "Close dialog"
 __meta__ = {
 "_edit_lock_": true
