@@ -4,6 +4,7 @@ const PATH_SAVE_DATA: String = "user://warm_bee.data"
 
 var _collections: Array = []
 var _selected_collection: Dictionary
+var _selected_entry: Dictionary
 
 var _main: Control
 
@@ -33,13 +34,12 @@ func create_collection(c_name: String) -> void:
 
 func create_entry(e_name: String, type: int) -> void:
 	var new_entry: Dictionary
-	var entry_id: int = _get_unique_id()
 	if type == Structure.ENTRY_TYPES.NOTE:
-		new_entry = { "id": entry_id, "name": e_name, "type": type, "text": "" }
+		new_entry = { "id": _get_unique_id(), "name": e_name, "type": type, "text": "" }
 	elif type == Structure.ENTRY_TYPES.LIST:
-		new_entry = { "id": entry_id, "name": e_name, "type": type, "content": [] }
+		new_entry = { "id": _get_unique_id(), "name": e_name, "type": type, "content": [] }
 	_selected_collection["entries"].push_back(new_entry)
-	_main.entry_added(entry_id)
+	_main.entry_added(new_entry)
 	_save_data_to_file()
 
 
@@ -51,7 +51,11 @@ func select_collection_by_id(collection_id: int) -> void:
 
 
 func select_entry_by_id(entry_id: int) -> void:
-	_main.display_entry_content(entry_id)
+	for entry in _selected_collection["entries"]:
+		if entry["id"] == entry_id:
+			_selected_entry = entry
+			_main.display_entry_content(entry)
+			break
 
 
 func get_collections() -> Array:
@@ -64,6 +68,14 @@ func get_entries_of_selected_collection() -> Array:
 
 func is_a_collection_selected() -> bool:
 	return _selected_collection == null
+
+
+func change_entry_text(new_text: String) -> void:
+	if _selected_entry.empty():
+		return
+	if _selected_entry["type"] == Structure.ENTRY_TYPES.NOTE:
+		_selected_entry["text"] = new_text
+		_save_data_to_file()
 
 
 func _select_collection(collection: Dictionary) -> void:

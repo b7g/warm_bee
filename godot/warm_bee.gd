@@ -8,15 +8,17 @@ var _ui_entry_button_res: Resource = preload("res://ui_component/entry_button.ts
 onready var _opt_collections: OptionButton = $MC/HC/VC/HC/OptCollections
 onready var _entry_list: VBoxContainer = $MC/HC/VC/SCEntries/VC
 onready var _btn_add_entry: Button = $MC/HC/VC/ButtonAddEntry
+onready var _label_entry_name: Label = $MC/HC/VC2/MC/HC/LabelEntryName
+onready var _text_edit_entry_content: TextEdit = $MC/HC/VC2/TextEditEntryContent
 
 
 func _ready() -> void:
 	Data.set_main_ref(self)
 
 
-func entry_added(entry_id: int) -> void:
+func entry_added(entry: Dictionary) -> void:
 	display_entries()
-	display_entry_content(entry_id)
+	display_entry_content(entry)
 
 
 func display_collections() -> void:
@@ -38,8 +40,10 @@ func display_entries() -> void:
 		_entry_list.add_child(entry_button)
 
 
-func display_entry_content(_entry_id: int) -> void:
-	pass
+func display_entry_content(entry: Dictionary) -> void:
+	_label_entry_name.text = entry["name"]
+	if entry["type"] == Structure.ENTRY_TYPES.NOTE:
+		_text_edit_entry_content.text = entry["text"]
 
 
 func _on_OptCollections_item_selected(index: int) -> void:
@@ -57,3 +61,7 @@ func _on_ButtonAddEntry_pressed() -> void:
 	var dialog_add_entry: Control = _dialog_add_entry_res.instance()
 	dialog_add_entry.set_main_ref(self)
 	add_child(dialog_add_entry)
+
+
+func _on_TextEditEntryContent_text_changed() -> void:
+	Data.change_entry_text(_text_edit_entry_content.text)

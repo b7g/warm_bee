@@ -8,9 +8,9 @@ extends Node
 #	list_item = { text: String, is_urgent: bool, is_important: bool }
 #
 
-enum ENTRY_TYPES { NOTE, LIST }
+enum ENTRY_TYPES { NOTE } #, LIST }
 
-const ENTRY_TYPE_NAMES: Array = ["Note", "List"]
+const ENTRY_TYPE_NAMES: Array = ["Note"] #, "List"]
 
 
 func get_entry_types() -> Dictionary:
