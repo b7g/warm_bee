@@ -1,13 +1,21 @@
 extends Node
 
-enum COLLECTION_TYPES { NOTE, LIST }
+#
+#	collections = []
+#	collection = { name: String, entries = [entry, ...] }
+#	entry (type note) = { name: String, type: int, text: String }
+#	entry (type list) = { name: String, type: int, content = [list_item, ...]}
+#	list_item = { text: String, is_urgent: bool, is_important: bool }
+#
 
-var _collection_names: Array = ["Note", "List"]
+enum ENTRY_TYPES { NOTE, LIST }
+
+const ENTRY_TYPE_NAMES: Array = ["Note", "List"]
 
 
-func get_collection_types() -> Dictionary:
-	return COLLECTION_TYPES.duplicate()
+func get_entry_types() -> Dictionary:
+	return ENTRY_TYPES.duplicate()
 
 
-func get_collection_type_display_names() -> Array:
-	return _collection_names.duplicate()
+func get_entry_type_display_names() -> Array:
+	return ENTRY_TYPE_NAMES.duplicate()

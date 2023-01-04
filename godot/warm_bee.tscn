@@ -15,25 +15,47 @@ custom_constants/margin_top = 16
 custom_constants/margin_left = 16
 custom_constants/margin_bottom = 16
 
-[node name="VC" type="VBoxContainer" parent="MC"]
+[node name="HC" type="HBoxContainer" parent="MC"]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 1008.0
 margin_bottom = 584.0
 
-[node name="ButtonAddCollection" type="Button" parent="MC/VC"]
-margin_right = 992.0
+[node name="VC" type="VBoxContainer" parent="MC/HC"]
+margin_right = 134.0
+margin_bottom = 568.0
+
+[node name="ButtonAddCollection" type="Button" parent="MC/HC/VC"]
+margin_right = 134.0
 margin_bottom = 20.0
 text = "Add new collection"
 
-[node name="SC" type="ScrollContainer" parent="MC/VC"]
+[node name="SCCollections" type="ScrollContainer" parent="MC/HC/VC"]
 margin_top = 24.0
-margin_right = 992.0
+margin_right = 134.0
+margin_bottom = 282.0
+size_flags_vertical = 3
+
+[node name="VC" type="VBoxContainer" parent="MC/HC/VC/SCCollections"]
+margin_right = 134.0
+size_flags_horizontal = 3
+
+[node name="ButtonAddEntry" type="Button" parent="MC/HC/VC"]
+margin_top = 286.0
+margin_right = 134.0
+margin_bottom = 306.0
+disabled = true
+text = "Add new entry"
+
+[node name="SCEntries" type="ScrollContainer" parent="MC/HC/VC"]
+margin_top = 310.0
+margin_right = 134.0
 margin_bottom = 568.0
 size_flags_vertical = 3
 
-[node name="VCCollectionList" type="VBoxContainer" parent="MC/VC/SC"]
-margin_right = 992.0
+[node name="VC" type="VBoxContainer" parent="MC/HC/VC/SCEntries"]
+margin_right = 134.0
 size_flags_horizontal = 3
 
-[connection signal="pressed" from="MC/VC/ButtonAddCollection" to="." method="_on_ButtonAddCollection_pressed"]
+[connection signal="pressed" from="MC/HC/VC/ButtonAddCollection" to="." method="_on_ButtonAddCollection_pressed"]
+[connection signal="pressed" from="MC/HC/VC/ButtonAddEntry" to="." method="_on_ButtonAddEntry_pressed"]
