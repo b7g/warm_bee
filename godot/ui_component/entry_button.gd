@@ -6,7 +6,8 @@ var _entry: Dictionary
 
 
 func _ready() -> void:
-	text = _entry["name"]
+	var entry_type_text: String = Structure.get_entry_type_display_names()[_entry["type"]]
+	text = "%s: %s" % [entry_type_text, _entry["name"]]
 
 
 func set_main_ref(main: Control) -> void:
