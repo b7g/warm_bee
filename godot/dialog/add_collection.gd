@@ -1,10 +1,6 @@
 extends Control
 
-enum COLLECTION_TYPES { NOTE, LIST }
-
 var _main: Control
-
-var _collection_names: Array = ["Note", "List"]
 
 onready var _txt_collection_name: LineEdit = $VC/LineEditName
 onready var _opt_collection_type: OptionButton = $VC/HC/OptionButtonType
@@ -12,8 +8,8 @@ onready var _btn_create: Button = $VC/ButtonCreate
 
 
 func _ready() -> void:
-	for type_id in COLLECTION_TYPES.size():
-		_opt_collection_type.add_item(_collection_names[type_id])
+	for type_id in Structure.get_collection_types().size():
+		_opt_collection_type.add_item(Structure.get_collection_type_display_names()[type_id])
 	_txt_collection_name.grab_focus()
 
 

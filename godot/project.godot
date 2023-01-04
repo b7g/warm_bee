@@ -14,6 +14,10 @@ config/name="Warm Bee"
 run/main_scene="res://warm_bee.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Structure="*res://singleton/structure.gd"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
