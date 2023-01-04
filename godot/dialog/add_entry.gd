@@ -2,9 +2,9 @@ extends Control
 
 var _main: Control
 
-onready var _txt_entry_name: LineEdit = $VC/LineEditName
-onready var _opt_entry_type: OptionButton = $VC/HC/OptionButtonType
-onready var _btn_create: Button = $VC/ButtonCreate
+onready var _txt_entry_name: LineEdit = $CC/VC/LineEditName
+onready var _opt_entry_type: OptionButton = $CC/VC/HC/OptionButtonType
+onready var _btn_create: Button = $CC/VC/ButtonCreate
 
 
 func _ready() -> void:
@@ -27,4 +27,8 @@ func _on_ButtonCreate_pressed() -> void:
 	if entry_name.empty():
 		return
 	Data.create_entry(entry_name, entry_type)
+	queue_free()
+
+
+func _on_ButtonClose_pressed() -> void:
 	queue_free()

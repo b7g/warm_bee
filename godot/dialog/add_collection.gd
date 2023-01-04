@@ -2,8 +2,8 @@ extends Control
 
 var _main: Control
 
-onready var _txt_collection_name: LineEdit = $VC/LineEditName
-onready var _btn_create: Button = $VC/ButtonCreate
+onready var _txt_collection_name: LineEdit = $CC/VC/LineEditName
+onready var _btn_create: Button = $CC/VC/ButtonCreate
 
 
 func _ready() -> void:
@@ -23,4 +23,8 @@ func _on_ButtonCreate_pressed() -> void:
 	if collection_name.empty():
 		return
 	Data.create_collection(collection_name)
+	queue_free()
+
+
+func _on_ButtonClose_pressed() -> void:
 	queue_free()

@@ -2,32 +2,60 @@
 
 [ext_resource path="res://dialog/add_collection.gd" type="Script" id=1]
 
-[node name="AddCollectionDialog" type="Control"]
+[node name="AddCollectionDialog" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.501961 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="VC" type="VBoxContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="CC" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="LabelDescription" type="Label" parent="VC"]
+[node name="VC" type="VBoxContainer" parent="CC"]
+margin_left = 437.0
+margin_top = 267.0
+margin_right = 586.0
+margin_bottom = 333.0
+
+[node name="LabelDescription" type="Label" parent="CC/VC"]
 margin_right = 149.0
 margin_bottom = 14.0
 text = "Create a new collection"
 
-[node name="LineEditName" type="LineEdit" parent="VC"]
+[node name="LineEditName" type="LineEdit" parent="CC/VC"]
 margin_top = 18.0
 margin_right = 149.0
 margin_bottom = 42.0
 placeholder_text = "Collection name"
+caret_blink = true
+caret_blink_speed = 0.5
 
-[node name="ButtonCreate" type="Button" parent="VC"]
+[node name="ButtonCreate" type="Button" parent="CC/VC"]
 margin_top = 46.0
 margin_right = 149.0
 margin_bottom = 66.0
 disabled = true
 text = "Create"
 
-[connection signal="text_changed" from="VC/LineEditName" to="." method="_on_LineEditName_text_changed"]
-[connection signal="pressed" from="VC/ButtonCreate" to="." method="_on_ButtonCreate_pressed"]
+[node name="ButtonClose" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -123.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = 52.0
+text = "Close dialog"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="text_changed" from="CC/VC/LineEditName" to="." method="_on_LineEditName_text_changed"]
+[connection signal="pressed" from="CC/VC/ButtonCreate" to="." method="_on_ButtonCreate_pressed"]
+[connection signal="pressed" from="ButtonClose" to="." method="_on_ButtonClose_pressed"]

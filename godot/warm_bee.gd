@@ -22,9 +22,7 @@ func entry_added(entry_id: int) -> void:
 func display_collections() -> void:
 	for child in _collection_list.get_children():
 		child.queue_free()
-	var collections: Array = Data.get_collections()
-	_btn_add_entry.disabled = collections.empty()
-	for collection in collections:
+	for collection in Data.get_collections():
 		var collection_button: Control = _ui_collection_button_res.instance()
 		collection_button.set_main_ref(self)
 		collection_button.set_collection(collection)
@@ -34,6 +32,7 @@ func display_collections() -> void:
 func display_entries() -> void:
 	for child in _entry_list.get_children():
 		child.queue_free()
+	_btn_add_entry.disabled = Data.is_a_collection_selected()
 	for entry in Data.get_entries_of_selected_collection():
 		var entry_button: Control = _ui_entry_button_res.instance()
 		entry_button.set_main_ref(self)

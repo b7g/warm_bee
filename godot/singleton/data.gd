@@ -24,8 +24,8 @@ func create_collection(c_name: String) -> void:
 		"entries": []
 	}
 	_collections.push_back(new_collection)
-	_selected_collection = new_collection
 	_main.display_collections()
+	_select_collection(new_collection)
 	_save_data_to_file()
 
 
@@ -44,8 +44,7 @@ func create_entry(e_name: String, type: int) -> void:
 func select_collection_by_id(collection_id: int) -> void:
 	for collection in Data.get_collections():
 		if collection["id"] == collection_id:
-			_selected_collection = collection
-			_main.display_entries()
+			_select_collection(collection)
 			break
 
 
@@ -59,6 +58,15 @@ func get_collections() -> Array:
 
 func get_entries_of_selected_collection() -> Array:
 	return _selected_collection["entries"].duplicate()
+
+
+func is_a_collection_selected() -> bool:
+	return _selected_collection == null
+
+
+func _select_collection(collection: Dictionary) -> void:
+	_selected_collection = collection
+	_main.display_entries()
 
 
 func _save_data_to_file() -> void:
