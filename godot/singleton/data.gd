@@ -15,6 +15,8 @@ func _ready() -> void:
 func set_main_ref(main: Control) -> void:
 	_main = main
 	_main.display_collections()
+	if not _collections.empty():
+		_select_collection(_collections.front())
 
 
 func create_collection(c_name: String) -> void:

@@ -24,40 +24,52 @@ margin_right = 1008.0
 margin_bottom = 584.0
 
 [node name="VC" type="VBoxContainer" parent="MC/HC"]
-margin_right = 154.0
+margin_right = 121.0
 margin_bottom = 568.0
 
-[node name="ButtonAddCollection" type="Button" parent="MC/HC/VC"]
-margin_right = 154.0
+[node name="HC" type="HBoxContainer" parent="MC/HC/VC"]
+margin_right = 121.0
 margin_bottom = 29.0
-text = "Add new collection"
 
-[node name="SCCollections" type="ScrollContainer" parent="MC/HC/VC"]
-margin_top = 33.0
-margin_right = 154.0
-margin_bottom = 282.0
-size_flags_vertical = 3
-
-[node name="VC" type="VBoxContainer" parent="MC/HC/VC/SCCollections"]
-margin_right = 154.0
+[node name="OptCollections" type="OptionButton" parent="MC/HC/VC/HC"]
+margin_right = 96.0
+margin_bottom = 29.0
 size_flags_horizontal = 3
 
+[node name="ButtonAddCollection" type="Button" parent="MC/HC/VC/HC"]
+margin_left = 100.0
+margin_right = 121.0
+margin_bottom = 29.0
+text = "+"
+
+[node name="Spacer" type="MarginContainer" parent="MC/HC/VC"]
+margin_top = 33.0
+margin_right = 121.0
+margin_bottom = 49.0
+custom_constants/margin_top = 16
+
 [node name="ButtonAddEntry" type="Button" parent="MC/HC/VC"]
-margin_top = 286.0
-margin_right = 154.0
-margin_bottom = 315.0
+margin_top = 53.0
+margin_right = 121.0
+margin_bottom = 82.0
 disabled = true
 text = "Add new entry"
 
+[node name="Spacer2" type="MarginContainer" parent="MC/HC/VC"]
+margin_top = 86.0
+margin_right = 121.0
+margin_bottom = 86.0
+
 [node name="SCEntries" type="ScrollContainer" parent="MC/HC/VC"]
-margin_top = 319.0
-margin_right = 154.0
+margin_top = 90.0
+margin_right = 121.0
 margin_bottom = 568.0
 size_flags_vertical = 3
 
 [node name="VC" type="VBoxContainer" parent="MC/HC/VC/SCEntries"]
-margin_right = 154.0
+margin_right = 121.0
 size_flags_horizontal = 3
 
-[connection signal="pressed" from="MC/HC/VC/ButtonAddCollection" to="." method="_on_ButtonAddCollection_pressed"]
+[connection signal="item_selected" from="MC/HC/VC/HC/OptCollections" to="." method="_on_OptCollections_item_selected"]
+[connection signal="pressed" from="MC/HC/VC/HC/ButtonAddCollection" to="." method="_on_ButtonAddCollection_pressed"]
 [connection signal="pressed" from="MC/HC/VC/ButtonAddEntry" to="." method="_on_ButtonAddEntry_pressed"]

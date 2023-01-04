@@ -5,7 +5,7 @@ var _dialog_add_entry_res: Resource = preload("res://dialog/add_entry.tscn")
 var _ui_collection_button_res: Resource = preload("res://ui_component/collection_button.tscn")
 var _ui_entry_button_res: Resource = preload("res://ui_component/entry_button.tscn")
 
-onready var _collection_list: VBoxContainer = $MC/HC/VC/SCCollections/VC
+onready var _opt_collections: OptionButton = $MC/HC/VC/HC/OptCollections
 onready var _entry_list: VBoxContainer = $MC/HC/VC/SCEntries/VC
 onready var _btn_add_entry: Button = $MC/HC/VC/ButtonAddEntry
 
@@ -20,13 +20,11 @@ func entry_added(entry_id: int) -> void:
 
 
 func display_collections() -> void:
-	for child in _collection_list.get_children():
-		child.queue_free()
+	_opt_collections.clear()
 	for collection in Data.get_collections():
-		var collection_button: Control = _ui_collection_button_res.instance()
-		collection_button.set_main_ref(self)
-		collection_button.set_collection(collection)
-		_collection_list.add_child(collection_button)
+		_opt_collections.add_item(collection["name"])
+		var item_index: int = _opt_collections.get_item_count() - 1
+		_opt_collections.set_item_metadata(item_index, collection["id"])
 
 
 func display_entries() -> void:
@@ -42,6 +40,11 @@ func display_entries() -> void:
 
 func display_entry_content(_entry_id: int) -> void:
 	pass
+
+
+func _on_OptCollections_item_selected(index: int) -> void:
+	var collection_id: int = _opt_collections.get_item_metadata(index)
+	Data.select_collection_by_id(collection_id)
 
 
 func _on_ButtonAddCollection_pressed() -> void:
