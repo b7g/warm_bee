@@ -22,4 +22,4 @@ func _setup() -> void:
 
 
 func _on_CollectionButton_pressed() -> void:
-	_main.select_collection_by_id(_collection["id"])
+	Data.select_collection_by_id(_collection["id"])

@@ -26,5 +26,6 @@ func _on_ButtonCreate_pressed() -> void:
 	var entry_type: int = _opt_entry_type.selected
 	if entry_name.empty():
 		return
-	_main.create_entry(entry_name, entry_type)
+	var entry_id: int = Data.create_entry(entry_name, entry_type)
+	_main.entry_added(entry_id)
 	queue_free()

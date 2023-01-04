@@ -22,5 +22,6 @@ func _on_ButtonCreate_pressed() -> void:
 	var collection_name: String = _txt_collection_name.text
 	if collection_name.empty():
 		return
-	_main.create_collection(collection_name)
+	Data.create_collection(collection_name)
+	_main.collection_added()
 	queue_free()
