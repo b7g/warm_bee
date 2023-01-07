@@ -6,11 +6,22 @@ var _collections: Array = []
 var _selected_collection: Dictionary
 var _selected_entry: Dictionary
 
+var _timer_save_to_file: Timer
+var _unsaved_changes: bool = false
+
 var _main: Control
 
 
 func _ready() -> void:
 	_load_data_from_file()
+	_setup_timer_save_to_file()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_QUIT_REQUEST:
+		if not _unsaved_changes:
+			return
+		_save_data_to_file()
 
 
 func set_main_ref(main: Control) -> void:
@@ -75,7 +86,18 @@ func change_entry_text(new_text: String) -> void:
 		return
 	if _selected_entry["type"] == Structure.ENTRY_TYPES.NOTE:
 		_selected_entry["text"] = new_text
-		_save_data_to_file()
+		_timer_save_to_file.start()
+		_unsaved_changes = true
+
+
+func _setup_timer_save_to_file() -> void:
+	_timer_save_to_file = Timer.new()
+	_timer_save_to_file.set_wait_time(3.0)
+	_timer_save_to_file.set_one_shot(true)
+	var err: int = _timer_save_to_file.connect("timeout", self, "_save_data_to_file")
+	if err:
+		push_error("Could not connect _timer_save_to_file to timeout signal [err: %s]" % err)
+	add_child(_timer_save_to_file)
 
 
 func _select_collection(collection: Dictionary) -> void:
@@ -84,6 +106,7 @@ func _select_collection(collection: Dictionary) -> void:
 
 
 func _save_data_to_file() -> void:
+	print("save!")
 	var file: File = File.new()
 	var err: int = file.open(PATH_SAVE_DATA, File.WRITE)
 	if not err == OK:
@@ -91,6 +114,7 @@ func _save_data_to_file() -> void:
 		return
 	file.store_string(to_json(_collections))
 	file.close()
+	_unsaved_changes = false
 
 
 func _load_data_from_file() -> void:

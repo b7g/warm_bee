@@ -44,6 +44,7 @@ func display_entry_content(entry: Dictionary) -> void:
 	_label_entry_name.text = entry["name"]
 	if entry["type"] == Structure.ENTRY_TYPES.NOTE:
 		_text_edit_entry_content.text = entry["text"]
+		_text_edit_entry_content.set_readonly(false)
 
 
 func _on_OptCollections_item_selected(index: int) -> void:
