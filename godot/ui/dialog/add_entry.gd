@@ -1,7 +1,5 @@
 extends Control
 
-var _main: Control
-
 onready var _txt_entry_name: LineEdit = $CC/VC/LineEditName
 onready var _opt_entry_type: OptionButton = $CC/VC/HC/OptionButtonType
 onready var _btn_create: Button = $CC/VC/ButtonCreate
@@ -11,10 +9,6 @@ func _ready() -> void:
 	for type_id in Structure.get_entry_types().size():
 		_opt_entry_type.add_item(Structure.get_entry_type_display_names()[type_id])
 	_txt_entry_name.grab_focus()
-
-
-func set_main_ref(main: Control) -> void:
-	_main = main
 
 
 func _on_LineEditName_text_changed(new_text: String) -> void:

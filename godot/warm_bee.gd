@@ -15,20 +15,28 @@ onready var _btn_delete_entry: Button = $MC/HC/VC2/MC/HC/ButtonDeleteEntry
 
 
 func _ready() -> void:
-	Data.set_main_ref(self)
+	Data.set_interface_ref(self)
+	display_collections()
+
+
+func collection_selected(collection: Dictionary) -> void:
+	_display_entries()
+	_clear_entry_space()
+	for option_index in _opt_collections.get_item_count():
+		var opt_collection_id: int = _opt_collections.get_item_metadata(option_index)
+		if opt_collection_id == collection["id"]:
+			_opt_collections.select(option_index)
+			break
 
 
 func entry_added(entry: Dictionary) -> void:
-	display_entries()
+	_display_entries()
 	display_entry_content(entry)
 
 
 func entry_deleted() -> void:
-	display_entries()
-	_label_entry_name.text = "-"
-	_text_edit_entry_content.text = ""
-	_text_edit_entry_content.set_readonly(true)
-	_btn_delete_entry.set_disabled(true)
+	_display_entries()
+	_clear_entry_space()
 
 
 func display_collections() -> void:
@@ -39,17 +47,6 @@ func display_collections() -> void:
 		_opt_collections.set_item_metadata(item_index, collection["id"])
 
 
-func display_entries() -> void:
-	for child in _entry_list.get_children():
-		child.queue_free()
-	_btn_add_entry.disabled = Data.is_a_collection_selected()
-	for entry in Data.get_entries_of_selected_collection():
-		var entry_button: Control = _ui_entry_button_res.instance()
-		entry_button.set_main_ref(self)
-		entry_button.set_entry(entry)
-		_entry_list.add_child(entry_button)
-
-
 func display_entry_content(entry: Dictionary) -> void:
 	_label_entry_name.text = entry["name"]
 	_btn_delete_entry.set_disabled(false)
@@ -58,21 +55,34 @@ func display_entry_content(entry: Dictionary) -> void:
 		_text_edit_entry_content.set_readonly(false)
 
 
+func _display_entries() -> void:
+	for child in _entry_list.get_children():
+		child.queue_free()
+	_btn_add_entry.disabled = Data.is_a_collection_selected()
+	for entry in Data.get_entries_of_selected_collection():
+		var entry_button: Control = _ui_entry_button_res.instance()
+		entry_button.set_entry(entry)
+		_entry_list.add_child(entry_button)
+
+
+func _clear_entry_space() -> void:
+	_label_entry_name.text = "-"
+	_text_edit_entry_content.text = ""
+	_text_edit_entry_content.set_readonly(true)
+	_btn_delete_entry.set_disabled(true)
+
+
 func _on_OptCollections_item_selected(index: int) -> void:
 	var collection_id: int = _opt_collections.get_item_metadata(index)
 	Data.select_collection_by_id(collection_id)
 
 
 func _on_ButtonAddCollection_pressed() -> void:
-	var dialog_add_collection: Control = _dialog_add_collection_res.instance()
-	dialog_add_collection.set_main_ref(self)
-	add_child(dialog_add_collection)
+	add_child(_dialog_add_collection_res.instance())
 
 
 func _on_ButtonAddEntry_pressed() -> void:
-	var dialog_add_entry: Control = _dialog_add_entry_res.instance()
-	dialog_add_entry.set_main_ref(self)
-	add_child(dialog_add_entry)
+	add_child(_dialog_add_entry_res.instance())
 
 
 func _on_TextEditEntryContent_text_changed() -> void:

@@ -9,7 +9,7 @@ var _selected_entry: Dictionary
 var _timer_save_to_file: Timer
 var _unsaved_changes: bool = false
 
-var _main: Control
+var _interface: Control
 
 
 func _ready() -> void:
@@ -24,9 +24,8 @@ func _notification(what: int) -> void:
 		_save_data_to_file()
 
 
-func set_main_ref(main: Control) -> void:
-	_main = main
-	_main.display_collections()
+func set_interface_ref(interface: Control) -> void:
+	_interface = interface
 	if not _collections.empty():
 		_select_collection(_collections.front())
 
@@ -38,7 +37,7 @@ func create_collection(c_name: String) -> void:
 		"entries": []
 	}
 	_collections.push_back(new_collection)
-	_main.display_collections()
+	_interface.display_collections()
 	_select_collection(new_collection)
 	_save_data_to_file()
 
@@ -51,7 +50,7 @@ func create_entry(e_name: String, type: int) -> void:
 		new_entry = { "id": _get_unique_id(), "name": e_name, "type": type, "content": [] }
 	_selected_collection["entries"].push_back(new_entry)
 	_selected_entry = new_entry
-	_main.entry_added(new_entry)
+	_interface.entry_added(new_entry)
 	_save_data_to_file()
 
 
@@ -66,7 +65,7 @@ func select_entry_by_id(entry_id: int) -> void:
 	for entry in _selected_collection["entries"]:
 		if entry["id"] == entry_id:
 			_selected_entry = entry
-			_main.display_entry_content(entry)
+			_interface.display_entry_content(entry)
 			break
 
 
@@ -101,7 +100,7 @@ func delete_entry() -> void:
 		if entry["id"] == delete_entry_id:
 			_selected_collection["entries"].remove(entry_index)
 			_selected_entry = {}
-			_main.entry_deleted()
+			_interface.entry_deleted()
 			_save_data_delayed_to_file()
 			break
 
@@ -123,7 +122,7 @@ func _save_data_delayed_to_file() -> void:
 
 func _select_collection(collection: Dictionary) -> void:
 	_selected_collection = collection
-	_main.display_entries()
+	_interface.collection_selected(_selected_collection)
 
 
 func _save_data_to_file() -> void:
