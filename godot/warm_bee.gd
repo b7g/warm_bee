@@ -1,15 +1,17 @@
 extends Control
 
-var _dialog_add_collection_res: Resource = preload("res://dialog/add_collection.tscn")
-var _dialog_add_entry_res: Resource = preload("res://dialog/add_entry.tscn")
-var _ui_collection_button_res: Resource = preload("res://ui_component/collection_button.tscn")
-var _ui_entry_button_res: Resource = preload("res://ui_component/entry_button.tscn")
+var _dialog_add_collection_res: Resource = preload("res://ui/dialog/add_collection.tscn")
+var _dialog_add_entry_res: Resource = preload("res://ui/dialog/add_entry.tscn")
+var _dialog_delete_entry_res: Resource = preload("res://ui/dialog/delete_entry.tscn")
+var _ui_collection_button_res: Resource = preload("res://ui/component/collection_button.tscn")
+var _ui_entry_button_res: Resource = preload("res://ui/component/entry_button.tscn")
 
 onready var _opt_collections: OptionButton = $MC/HC/VC/HC/OptCollections
 onready var _entry_list: VBoxContainer = $MC/HC/VC/SCEntries/VC
 onready var _btn_add_entry: Button = $MC/HC/VC/ButtonAddEntry
 onready var _label_entry_name: Label = $MC/HC/VC2/MC/HC/LabelEntryName
 onready var _text_edit_entry_content: TextEdit = $MC/HC/VC2/TextEditEntryContent
+onready var _btn_delete_entry: Button = $MC/HC/VC2/MC/HC/ButtonDeleteEntry
 
 
 func _ready() -> void:
@@ -19,6 +21,14 @@ func _ready() -> void:
 func entry_added(entry: Dictionary) -> void:
 	display_entries()
 	display_entry_content(entry)
+
+
+func entry_deleted() -> void:
+	display_entries()
+	_label_entry_name.text = "-"
+	_text_edit_entry_content.text = ""
+	_text_edit_entry_content.set_readonly(true)
+	_btn_delete_entry.set_disabled(true)
 
 
 func display_collections() -> void:
@@ -42,6 +52,7 @@ func display_entries() -> void:
 
 func display_entry_content(entry: Dictionary) -> void:
 	_label_entry_name.text = entry["name"]
+	_btn_delete_entry.set_disabled(false)
 	if entry["type"] == Structure.ENTRY_TYPES.NOTE:
 		_text_edit_entry_content.text = entry["text"]
 		_text_edit_entry_content.set_readonly(false)
@@ -66,3 +77,9 @@ func _on_ButtonAddEntry_pressed() -> void:
 
 func _on_TextEditEntryContent_text_changed() -> void:
 	Data.change_entry_text(_text_edit_entry_content.text)
+
+
+func _on_ButtonDeleteEntry_pressed() -> void:
+	var dialog_delete_entry: Control = _dialog_delete_entry_res.instance()
+	dialog_delete_entry.set_entry_name(Data.get_entry_name())
+	add_child(dialog_delete_entry)

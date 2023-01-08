@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://dialog/add_entry.gd" type="Script" id=1]
+[ext_resource path="res://ui/dialog/add_entry.gd" type="Script" id=1]
 
 [node name="AddEntryDialog" type="ColorRect"]
 anchor_right = 1.0

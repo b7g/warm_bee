@@ -50,6 +50,7 @@ func create_entry(e_name: String, type: int) -> void:
 	elif type == Structure.ENTRY_TYPES.LIST:
 		new_entry = { "id": _get_unique_id(), "name": e_name, "type": type, "content": [] }
 	_selected_collection["entries"].push_back(new_entry)
+	_selected_entry = new_entry
 	_main.entry_added(new_entry)
 	_save_data_to_file()
 
@@ -81,13 +82,28 @@ func is_a_collection_selected() -> bool:
 	return _selected_collection == null
 
 
+func get_entry_name() -> String:
+	return _selected_entry["name"]
+
+
 func change_entry_text(new_text: String) -> void:
 	if _selected_entry.empty():
 		return
 	if _selected_entry["type"] == Structure.ENTRY_TYPES.NOTE:
 		_selected_entry["text"] = new_text
-		_timer_save_to_file.start()
-		_unsaved_changes = true
+		_save_data_delayed_to_file()
+
+
+func delete_entry() -> void:
+	var delete_entry_id: int = _selected_entry["id"]
+	for entry_index in _selected_collection["entries"].size():
+		var entry: Dictionary = _selected_collection["entries"][entry_index]
+		if entry["id"] == delete_entry_id:
+			_selected_collection["entries"].remove(entry_index)
+			_selected_entry = {}
+			_main.entry_deleted()
+			_save_data_delayed_to_file()
+			break
 
 
 func _setup_timer_save_to_file() -> void:
@@ -100,13 +116,17 @@ func _setup_timer_save_to_file() -> void:
 	add_child(_timer_save_to_file)
 
 
+func _save_data_delayed_to_file() -> void:
+	_timer_save_to_file.start()
+	_unsaved_changes = true
+
+
 func _select_collection(collection: Dictionary) -> void:
 	_selected_collection = collection
 	_main.display_entries()
 
 
 func _save_data_to_file() -> void:
-	print("save!")
 	var file: File = File.new()
 	var err: int = file.open(PATH_SAVE_DATA, File.WRITE)
 	if not err == OK:

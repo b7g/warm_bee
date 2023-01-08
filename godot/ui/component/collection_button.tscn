@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://ui_component/collection_button.gd" type="Script" id=1]
+[ext_resource path="res://ui/component/collection_button.gd" type="Script" id=1]
 
 [node name="CollectionButton" type="Button"]
 margin_right = 12.0
