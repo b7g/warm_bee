@@ -14,8 +14,8 @@ const ENTRY_TYPE_NAMES: Array = ["Note"] #, "List"]
 
 
 func get_entry_types() -> Dictionary:
-	return ENTRY_TYPES.duplicate()
+	return ENTRY_TYPES.duplicate(true)
 
 
 func get_entry_type_display_names() -> Array:
-	return ENTRY_TYPE_NAMES.duplicate()
+	return ENTRY_TYPE_NAMES.duplicate(true)

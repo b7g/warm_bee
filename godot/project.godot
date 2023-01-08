@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 
 Structure="*res://singleton/structure.gd"
 Data="*res://singleton/data.gd"
+FileIO="*res://singleton/file_io.gd"
 
 [gui]
 
