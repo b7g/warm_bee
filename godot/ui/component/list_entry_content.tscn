@@ -3,13 +3,22 @@
 [ext_resource path="res://ui/component/list_entry_content.gd" type="Script" id=1]
 
 [node name="ListEntryContent" type="VBoxContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 200.0
+margin_bottom = 200.0
+size_flags_vertical = 3
 script = ExtResource( 1 )
 
 [node name="ButtonNewListItem" type="Button" parent="."]
-margin_right = 1024.0
+margin_right = 200.0
 margin_bottom = 20.0
 text = "Create list item"
+
+[node name="SC" type="ScrollContainer" parent="."]
+margin_top = 24.0
+margin_right = 200.0
+margin_bottom = 200.0
+size_flags_vertical = 3
+
+[node name="VC" type="VBoxContainer" parent="SC"]
 
 [connection signal="pressed" from="ButtonNewListItem" to="." method="_on_ButtonNewListItem_pressed"]

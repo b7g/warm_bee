@@ -3,7 +3,9 @@ extends VBoxContainer
 var _interface: Control
 var _entry: Dictionary
 
-onready var _dialog_add_list_item_res: Resource = preload("res://ui/dialog/add_list_item.tscn")
+var _dialog_add_list_item_res: Resource = preload("res://ui/dialog/add_list_item.tscn")
+
+onready var _ui_item_wrap: VBoxContainer = $SC/VC
 
 
 func _ready() -> void:
@@ -22,7 +24,7 @@ func set_entry(entry: Dictionary) -> void:
 func add_item(item_text: String) -> void:
 	var item: Label = Label.new()
 	item.text = item_text
-	add_child(item)
+	_ui_item_wrap.add_child(item)
 
 
 func _on_ButtonNewListItem_pressed() -> void:
