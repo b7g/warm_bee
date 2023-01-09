@@ -64,10 +64,6 @@ func get_entries_of_selected_collection() -> Array:
 	return _selected_collection["entries"].duplicate()
 
 
-func is_a_collection_selected() -> bool:
-	return _selected_collection == null
-
-
 func get_entry_name() -> String:
 	return _selected_entry["name"]
 

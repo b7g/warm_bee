@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/component/note_entry_content.gd" type="Script" id=1]
+
+[node name="NoteEntryContent" type="TextEdit"]
+margin_right = 300.0
+margin_bottom = 200.0
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[connection signal="text_changed" from="." to="." method="_on_NoteEntryContent_text_changed"]
