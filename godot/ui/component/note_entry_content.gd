@@ -12,4 +12,4 @@ func set_entry(entry: Dictionary) -> void:
 
 
 func _on_NoteEntryContent_text_changed() -> void:
-	Data.change_entry_text(text)
+	Data.change_note_entry_text(text)

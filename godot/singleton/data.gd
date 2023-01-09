@@ -68,12 +68,15 @@ func get_entry_name() -> String:
 	return _selected_entry["name"]
 
 
-func change_entry_text(new_text: String) -> void:
-	if _selected_entry.empty():
-		return
-	if _selected_entry["type"] == Structure.ENTRY_TYPES.NOTE:
-		_selected_entry["text"] = new_text
-		FileIO.save_data_delayed()
+func change_note_entry_text(new_text: String) -> void:
+	_selected_entry["text"] = new_text
+	FileIO.save_data_delayed()
+
+
+func add_list_entry_item(text: String) -> void:
+	_selected_entry["content"].push_back(text)
+	_interface.add_list_entry_item(text)
+	FileIO.save_data_delayed()
 
 
 func delete_entry() -> void:

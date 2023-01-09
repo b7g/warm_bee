@@ -6,6 +6,7 @@ var _dialog_delete_entry_res: Resource = preload("res://ui/dialog/delete_entry.t
 var _ui_collection_button_res: Resource = preload("res://ui/component/collection_button.tscn")
 var _ui_entry_button_res: Resource = preload("res://ui/component/entry_button.tscn")
 var _ui_note_entry_content_res: Resource = preload("res://ui/component/note_entry_content.tscn")
+var _ui_list_entry_content_res: Resource = preload("res://ui/component/list_entry_content.tscn")
 
 var _entry_content: Control
 
@@ -60,8 +61,15 @@ func display_entry_content(entry: Dictionary) -> void:
 	_btn_delete_entry.set_disabled(false)
 	if entry["type"] == Structure.ENTRY_TYPES.NOTE:
 		_entry_content = _ui_note_entry_content_res.instance()
-		_entry_content.set_entry(entry)
-		_ui_entry_content_wrap.add_child(_entry_content)
+	elif entry["type"] == Structure.ENTRY_TYPES.LIST:
+		_entry_content = _ui_list_entry_content_res.instance()
+		_entry_content.set_interface_ref(self)
+	_entry_content.set_entry(entry)
+	_ui_entry_content_wrap.add_child(_entry_content)
+
+
+func add_list_entry_item(item_text: String) -> void:
+	_entry_content.add_item(item_text)
 
 
 func _display_entries() -> void:
