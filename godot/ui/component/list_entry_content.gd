@@ -4,13 +4,15 @@ var _interface: Control
 var _entry: Dictionary
 
 var _dialog_add_list_item_res: Resource = preload("res://ui/dialog/add_list_item.tscn")
+var _list_item_res: Resource = preload("res://ui/component/list_entry_item.tscn")
 
 onready var _ui_item_wrap: VBoxContainer = $SC/VC
 
 
 func _ready() -> void:
-	for item_text in _entry["content"]:
-		add_item(item_text)
+	for item_key in _entry["items"].keys():
+		var item: Dictionary = _entry["items"][item_key]
+		add_item(item_key, item)
 
 
 func set_interface_ref(interface: Control) -> void:
@@ -21,10 +23,12 @@ func set_entry(entry: Dictionary) -> void:
 	_entry = entry
 
 
-func add_item(item_text: String) -> void:
-	var item: Label = Label.new()
-	item.text = item_text
-	_ui_item_wrap.add_child(item)
+func add_item(item_key: String, item: Dictionary) -> void:
+	var ui_item: Control = _list_item_res.instance()
+	ui_item.set_interface_ref(_interface)
+	ui_item.set_item_key(item_key)
+	ui_item.set_item(item)
+	_ui_item_wrap.add_child(ui_item)
 
 
 func _on_ButtonNewListItem_pressed() -> void:

@@ -1,12 +1,28 @@
 extends Node
 
-#
-#	collections = []
-#	collection = { id: int, name: String, entries = [entry, ...] }
-#	entry (type note) = { id: int, name: String, type: int, text: String }
-#	entry (type list) = { id: int, name: String, type: int, content = [list_item, ...]}
-#	list_item = { text: String, is_urgent: bool, is_important: bool }
-#
+#	collections = [collection, ...]
+#	collection = {
+#		id: int,
+#		name: String,
+#		entries = [entry, ...]
+#	}
+#	entry (type note) = {
+#		id: int,
+#		name: String,
+#		type: int,
+#		text: String
+#	}
+#	entry (type list) = {
+#		id: int,
+#		name: String,
+#		type: int,
+#		items = { id(String): list_item, ... },
+#		tags = { id(String): tag(String), ... }
+#	}
+#	list_item = {
+#		text: String,
+#		tags = [tag_id: int, ...]
+#	}
 
 enum ENTRY_TYPES { NOTE, LIST }
 

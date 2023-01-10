@@ -3,6 +3,9 @@ extends Control
 var _dialog_add_collection_res: Resource = preload("res://ui/dialog/add_collection.tscn")
 var _dialog_add_entry_res: Resource = preload("res://ui/dialog/add_entry.tscn")
 var _dialog_delete_entry_res: Resource = preload("res://ui/dialog/delete_entry.tscn")
+var _edit_item_dialog_res: Resource = preload("res://ui/dialog/edit_list_item.tscn")
+var _dialog_delete_item_res: Resource = preload("res://ui/dialog/delete_item.tscn")
+
 var _ui_collection_button_res: Resource = preload("res://ui/component/collection_button.tscn")
 var _ui_entry_button_res: Resource = preload("res://ui/component/entry_button.tscn")
 var _ui_note_entry_content_res: Resource = preload("res://ui/component/note_entry_content.tscn")
@@ -68,8 +71,23 @@ func display_entry_content(entry: Dictionary) -> void:
 	_ui_entry_content_wrap.add_child(_entry_content)
 
 
-func add_list_entry_item(item_text: String) -> void:
-	_entry_content.add_item(item_text)
+func add_list_entry_item(item_key: String, item: Dictionary) -> void:
+	_entry_content.add_item(item_key, item)
+
+
+func open_edit_item_dialog(item_key: String, text: String, ui_item: Control) -> void:
+	var edit_item_dialog: Control = _edit_item_dialog_res.instance()
+	edit_item_dialog.set_item_key(item_key)
+	edit_item_dialog.set_text(text)
+	edit_item_dialog.set_ui_item_ref(ui_item)
+	add_child(edit_item_dialog)
+
+
+func open_delete_item_dialog(item_key: String, ui_item: Control) -> void:
+	var delete_item_dialog: Control = _dialog_delete_item_res.instance()
+	delete_item_dialog.set_item_key(item_key)
+	delete_item_dialog.set_ui_item_ref(ui_item)
+	add_child(delete_item_dialog)
 
 
 func _display_entries() -> void:

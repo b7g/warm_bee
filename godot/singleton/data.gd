@@ -32,9 +32,20 @@ func create_collection(c_name: String) -> void:
 func create_entry(e_name: String, type: int) -> void:
 	var new_entry: Dictionary
 	if type == Structure.ENTRY_TYPES.NOTE:
-		new_entry = { "id": _get_unique_id(), "name": e_name, "type": type, "text": "" }
+		new_entry = {
+			"id": _get_unique_id(),
+			"name": e_name,
+			"type": type,
+			"text": ""
+		}
 	elif type == Structure.ENTRY_TYPES.LIST:
-		new_entry = { "id": _get_unique_id(), "name": e_name, "type": type, "content": [] }
+		new_entry = {
+			"id": _get_unique_id(),
+			"name": e_name,
+			"type": type,
+			"items": {},
+			"tags": {}
+		}
 	_selected_collection["entries"].push_back(new_entry)
 	_selected_entry = new_entry
 	_interface.entry_added(new_entry)
@@ -74,8 +85,23 @@ func change_note_entry_text(new_text: String) -> void:
 
 
 func add_list_entry_item(text: String) -> void:
-	_selected_entry["content"].push_back(text)
-	_interface.add_list_entry_item(text)
+	var item_key: String = str(_get_unique_id())
+	var item: Dictionary = {
+		"text": text,
+		"tags": []
+	}
+	_selected_entry["items"][item_key] = item
+	_interface.add_list_entry_item(item_key, item)
+	FileIO.save_data_delayed()
+
+
+func delete_list_entry_item(item_key: String) -> void:
+	_selected_entry["items"].erase(item_key)
+	FileIO.save_data_delayed()
+
+
+func edit_list_entry_item(item_key: String, new_text: String) -> void:
+	_selected_entry["items"][item_key]["text"] = new_text
 	FileIO.save_data_delayed()
 
 

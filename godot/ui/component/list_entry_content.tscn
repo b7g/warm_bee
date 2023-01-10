@@ -20,5 +20,7 @@ margin_bottom = 200.0
 size_flags_vertical = 3
 
 [node name="VC" type="VBoxContainer" parent="SC"]
+margin_right = 200.0
+size_flags_horizontal = 3
 
 [connection signal="pressed" from="ButtonNewListItem" to="." method="_on_ButtonNewListItem_pressed"]
