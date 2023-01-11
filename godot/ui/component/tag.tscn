@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/panel_tag.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/component/tag.gd" type="Script" id=2]
+
+[node name="Tag" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 3.0
+margin_right = 93.0
+margin_bottom = 17.0
+text = "unnamed tag"

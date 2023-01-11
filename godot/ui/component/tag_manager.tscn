@@ -1,0 +1,103 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/panel_dialog.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/component/tag_manager.gd" type="Script" id=2]
+
+[node name="TagManager" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="VC" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 258.0
+margin_bottom = 304.0
+custom_constants/separation = 12
+
+[node name="LabelDesc" type="Label" parent="VC"]
+margin_right = 250.0
+margin_bottom = 14.0
+text = "Tags"
+align = 1
+
+[node name="HC" type="HBoxContainer" parent="VC"]
+margin_top = 26.0
+margin_right = 250.0
+margin_bottom = 52.0
+
+[node name="LineEditFilter" type="LineEdit" parent="VC/HC"]
+margin_right = 193.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+clear_button_enabled = true
+placeholder_text = "Filter or create .."
+
+[node name="ButtonCreateTag" type="Button" parent="VC/HC"]
+margin_left = 197.0
+margin_right = 250.0
+margin_bottom = 26.0
+disabled = true
+text = "Create"
+
+[node name="SC" type="ScrollContainer" parent="VC"]
+margin_top = 64.0
+margin_right = 250.0
+margin_bottom = 264.0
+rect_min_size = Vector2( 250, 200 )
+scroll_horizontal_enabled = false
+
+[node name="VC" type="VBoxContainer" parent="VC/SC"]
+margin_right = 250.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="InfoVC" type="VBoxContainer" parent="VC/SC/VC"]
+margin_right = 250.0
+margin_bottom = 14.0
+
+[node name="LabelNoTags" type="Label" parent="VC/SC/VC/InfoVC"]
+margin_right = 250.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+text = "No tags yet"
+align = 1
+
+[node name="LabelNoResult" type="Label" parent="VC/SC/VC/InfoVC"]
+visible = false
+margin_top = 18.0
+margin_right = 250.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+text = "No tag found (filter active)"
+align = 1
+
+[node name="TagsVC" type="VBoxContainer" parent="VC/SC/VC"]
+margin_top = 14.0
+margin_right = 250.0
+margin_bottom = 14.0
+
+[node name="ButtonsHC" type="HBoxContainer" parent="VC"]
+margin_top = 276.0
+margin_right = 250.0
+margin_bottom = 296.0
+alignment = 1
+
+[node name="ButtonAdd" type="Button" parent="VC/ButtonsHC"]
+margin_left = 42.0
+margin_right = 149.0
+margin_bottom = 20.0
+text = "Apply selected"
+
+[node name="ButtonCancel" type="Button" parent="VC/ButtonsHC"]
+margin_left = 153.0
+margin_right = 207.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[connection signal="text_changed" from="VC/HC/LineEditFilter" to="." method="_on_LineEditFilter_text_changed"]
+[connection signal="pressed" from="VC/HC/ButtonCreateTag" to="." method="_on_ButtonCreateTag_pressed"]
+[connection signal="pressed" from="VC/ButtonsHC/ButtonAdd" to="." method="_on_ButtonAdd_pressed"]
+[connection signal="pressed" from="VC/ButtonsHC/ButtonCancel" to="." method="_on_ButtonCancel_pressed"]

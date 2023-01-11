@@ -16,12 +16,12 @@ extends Node
 #		id: int,
 #		name: String,
 #		type: int,
-#		items = { id(String): list_item, ... },
-#		tags = { id(String): tag(String), ... }
+#		items = { id_key(String): list_item, ... },
+#		tags = { id_key(String): tag(String), ... }
 #	}
 #	list_item = {
 #		text: String,
-#		tags = [tag_id: int, ...]
+#		tags = [tag_key: String, ...]
 #	}
 
 enum ENTRY_TYPES { NOTE, LIST }

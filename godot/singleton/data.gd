@@ -52,6 +52,25 @@ func create_entry(e_name: String, type: int) -> void:
 	FileIO.save_data_delayed()
 
 
+func create_tag(tag_name: String) -> String:
+	var tag_key: String = str(_get_unique_id())
+	_selected_entry["tags"][tag_key] = tag_name
+	FileIO.save_data_delayed()
+	return tag_key
+
+
+func get_tags() -> Dictionary:
+	return _selected_entry["tags"]
+
+
+func get_tag_by_key(tag_key: String) -> String:
+	return _selected_entry["tags"][tag_key]
+
+
+func get_item_tags(item_key: String) -> Array:
+	return _selected_entry["items"][item_key]["tags"]
+
+
 func select_collection_by_id(collection_id: int) -> void:
 	for collection in Data.get_collections():
 		if collection["id"] == collection_id:
@@ -84,11 +103,11 @@ func change_note_entry_text(new_text: String) -> void:
 	FileIO.save_data_delayed()
 
 
-func add_list_entry_item(text: String) -> void:
+func add_list_entry_item(text: String, selected_tags: Array) -> void:
 	var item_key: String = str(_get_unique_id())
 	var item: Dictionary = {
 		"text": text,
-		"tags": []
+		"tags": selected_tags
 	}
 	_selected_entry["items"][item_key] = item
 	_interface.add_list_entry_item(item_key, item)
@@ -100,8 +119,10 @@ func delete_list_entry_item(item_key: String) -> void:
 	FileIO.save_data_delayed()
 
 
-func edit_list_entry_item(item_key: String, new_text: String) -> void:
-	_selected_entry["items"][item_key]["text"] = new_text
+func edit_list_entry_item(item_key: String, new_text: String, selected_tags: Array) -> void:
+	var item: Dictionary = _selected_entry["items"][item_key]
+	item["text"] = new_text
+	item["tags"] = selected_tags
 	FileIO.save_data_delayed()
 
 

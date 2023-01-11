@@ -28,10 +28,15 @@ margin_bottom = 34.0
 
 [node name="LabelText" type="Label" parent="MC/HC"]
 margin_top = 6.0
-margin_right = 385.0
+margin_right = 381.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "-"
+
+[node name="TagsHC" type="HBoxContainer" parent="MC/HC"]
+margin_left = 385.0
+margin_right = 385.0
+size_flags_vertical = 0
 
 [node name="ButtonEdit" type="Button" parent="MC/HC"]
 margin_left = 389.0

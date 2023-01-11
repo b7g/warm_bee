@@ -6,10 +6,12 @@ var _item_key: String
 var _item: Dictionary
 
 onready var _label_text: Label = $MC/HC/LabelText
+onready var _tag_wrap: HBoxContainer = $MC/HC/TagsHC
 
 
 func _ready() -> void:
 	_label_text.text = _item["text"]
+	_display_tags()
 
 
 func set_interface_ref(interface: Control) -> void:
@@ -24,9 +26,20 @@ func set_item(item: Dictionary) -> void:
 	_item = item
 
 
-func update_text(new_text: String) -> void:
+func update_content(new_text: String, tag_keys: Array) -> void:
 	_item["text"] = new_text
+	_item["tags"] = tag_keys
 	_label_text.text = new_text
+	_display_tags()
+
+
+func _display_tags() -> void:
+	for ui_tag in _tag_wrap.get_children():
+		ui_tag.queue_free()
+	for tag_key in _item["tags"]:
+		var tag: String = Data.get_tag_by_key(tag_key)
+		var ui_tag: Control = UiShop.create_tag(tag)
+		_tag_wrap.add_child(ui_tag)
 
 
 func _on_ButtonEdit_pressed() -> void:

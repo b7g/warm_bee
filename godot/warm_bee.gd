@@ -3,7 +3,7 @@ extends Control
 var _dialog_add_collection_res: Resource = preload("res://ui/dialog/add_collection.tscn")
 var _dialog_add_entry_res: Resource = preload("res://ui/dialog/add_entry.tscn")
 var _dialog_delete_entry_res: Resource = preload("res://ui/dialog/delete_entry.tscn")
-var _edit_item_dialog_res: Resource = preload("res://ui/dialog/edit_list_item.tscn")
+var _dialog_ce_list_item_res: Resource = preload("res://ui/dialog/create_or_edit_list_item.tscn")
 var _dialog_delete_item_res: Resource = preload("res://ui/dialog/delete_item.tscn")
 
 var _ui_collection_button_res: Resource = preload("res://ui/component/collection_button.tscn")
@@ -76,11 +76,13 @@ func add_list_entry_item(item_key: String, item: Dictionary) -> void:
 
 
 func open_edit_item_dialog(item_key: String, text: String, ui_item: Control) -> void:
-	var edit_item_dialog: Control = _edit_item_dialog_res.instance()
-	edit_item_dialog.set_item_key(item_key)
-	edit_item_dialog.set_text(text)
-	edit_item_dialog.set_ui_item_ref(ui_item)
-	add_child(edit_item_dialog)
+	var dialog_edit_item: Control = _dialog_ce_list_item_res.instance()
+	dialog_edit_item.set_mode(dialog_edit_item.DIALOG_MODES.EDIT)
+	dialog_edit_item.set_item_key(item_key)
+	dialog_edit_item.set_text(text)
+	dialog_edit_item.set_ui_item_ref(ui_item)
+	dialog_edit_item.set_selected_tags(Data.get_item_tags(item_key))
+	add_child(dialog_edit_item)
 
 
 func open_delete_item_dialog(item_key: String, ui_item: Control) -> void:

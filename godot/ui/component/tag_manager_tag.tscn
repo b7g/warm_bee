@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/component/tag_manager_tag.gd" type="Script" id=1]
+
+[node name="TagManagerTag" type="PanelContainer"]
+margin_right = 300.0
+margin_bottom = 38.0
+script = ExtResource( 1 )
+
+[node name="HC" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 31.0
+
+[node name="CheckBoxSelect" type="CheckBox" parent="HC"]
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="LabelName" type="Label" parent="HC"]
+margin_left = 28.0
+margin_top = 5.0
+margin_right = 286.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "tag name"
+
+[node name="ButtonEdit" type="Button" parent="HC"]
+visible = false
+margin_left = 191.0
+margin_right = 227.0
+margin_bottom = 24.0
+text = "Edit"
+
+[node name="ButtonDelete" type="Button" parent="HC"]
+visible = false
+margin_left = 231.0
+margin_right = 286.0
+margin_bottom = 24.0
+text = "Delete"
