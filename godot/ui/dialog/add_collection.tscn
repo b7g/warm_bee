@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/dialog/add_collection.gd" type="Script" id=1]
+[ext_resource path="res://ui/panel_dialog.tres" type="StyleBox" id=2]
 
 [node name="AddCollectionDialog" type="ColorRect"]
 anchor_right = 1.0
@@ -18,45 +19,65 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="VC" type="VBoxContainer" parent="CC"]
-margin_left = 437.0
-margin_top = 267.0
-margin_right = 586.0
-margin_bottom = 333.0
+[node name="PC" type="PanelContainer" parent="CC"]
+margin_left = 379.0
+margin_top = 242.0
+margin_right = 645.0
+margin_bottom = 358.0
+custom_styles/panel = ExtResource( 2 )
 
-[node name="LabelDescription" type="Label" parent="CC/VC"]
-margin_right = 149.0
+[node name="VC" type="VBoxContainer" parent="CC/PC"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 258.0
+margin_bottom = 108.0
+custom_constants/separation = 12
+
+[node name="LabelDescription" type="Label" parent="CC/PC/VC"]
+margin_right = 250.0
 margin_bottom = 14.0
 text = "Create a new collection"
+align = 1
 
-[node name="LineEditName" type="LineEdit" parent="CC/VC"]
+[node name="VC" type="VBoxContainer" parent="CC/PC/VC"]
+margin_top = 26.0
+margin_right = 250.0
+margin_bottom = 68.0
+
+[node name="Label" type="Label" parent="CC/PC/VC/VC"]
+margin_right = 250.0
+margin_bottom = 14.0
+text = "Collection name"
+
+[node name="LineEditName" type="LineEdit" parent="CC/PC/VC/VC"]
 margin_top = 18.0
-margin_right = 149.0
+margin_right = 250.0
 margin_bottom = 42.0
-placeholder_text = "Collection name"
+rect_min_size = Vector2( 250, 0 )
+placeholder_text = "Notes from books"
 caret_blink = true
 caret_blink_speed = 0.5
 
-[node name="ButtonCreate" type="Button" parent="CC/VC"]
-margin_top = 46.0
-margin_right = 149.0
-margin_bottom = 66.0
+[node name="HC" type="HBoxContainer" parent="CC/PC/VC"]
+margin_top = 80.0
+margin_right = 250.0
+margin_bottom = 100.0
+alignment = 1
+
+[node name="ButtonCreate" type="Button" parent="CC/PC/VC/HC"]
+margin_left = 69.0
+margin_right = 122.0
+margin_bottom = 20.0
 disabled = true
 text = "Create"
 
-[node name="ButtonClose" type="Button" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -123.0
-margin_top = 32.0
-margin_right = -32.0
-margin_bottom = 52.0
+[node name="ButtonCancel" type="Button" parent="CC/PC/VC/HC"]
+margin_left = 126.0
+margin_right = 180.0
+margin_bottom = 20.0
 grow_horizontal = 0
-text = "Close dialog"
-__meta__ = {
-"_edit_lock_": true
-}
+text = "Cancel"
 
-[connection signal="text_changed" from="CC/VC/LineEditName" to="." method="_on_LineEditName_text_changed"]
-[connection signal="pressed" from="CC/VC/ButtonCreate" to="." method="_on_ButtonCreate_pressed"]
-[connection signal="pressed" from="ButtonClose" to="." method="_on_ButtonClose_pressed"]
+[connection signal="text_changed" from="CC/PC/VC/VC/LineEditName" to="." method="_on_LineEditName_text_changed"]
+[connection signal="pressed" from="CC/PC/VC/HC/ButtonCreate" to="." method="_on_ButtonCreate_pressed"]
+[connection signal="pressed" from="CC/PC/VC/HC/ButtonCancel" to="." method="_on_ButtonCancel_pressed"]

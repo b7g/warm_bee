@@ -2,7 +2,7 @@ extends ColorRect
 
 var _entry_name: String
 
-onready var _label_desc: Label = $CC/VC/LabelDesc
+onready var _label_desc: Label = $CC/PC/VC/LabelDesc
 
 
 func _ready() -> void:

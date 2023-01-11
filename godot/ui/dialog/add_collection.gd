@@ -1,7 +1,7 @@
 extends Control
 
-onready var _txt_collection_name: LineEdit = $CC/VC/LineEditName
-onready var _btn_create: Button = $CC/VC/ButtonCreate
+onready var _txt_collection_name: LineEdit = $CC/PC/VC/VC/LineEditName
+onready var _btn_create: Button = $CC/PC/VC/HC/ButtonCreate
 
 
 func _ready() -> void:
@@ -20,5 +20,5 @@ func _on_ButtonCreate_pressed() -> void:
 	queue_free()
 
 
-func _on_ButtonClose_pressed() -> void:
+func _on_ButtonCancel_pressed() -> void:
 	queue_free()

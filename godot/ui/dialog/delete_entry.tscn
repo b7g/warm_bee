@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/dialog/delete_entry.gd" type="Script" id=1]
+[ext_resource path="res://ui/panel_dialog.tres" type="StyleBox" id=2]
 
 [node name="DeleteEntryDialog" type="ColorRect"]
 anchor_right = 1.0
@@ -18,34 +19,44 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="VC" type="VBoxContainer" parent="CC"]
-margin_left = 455.0
-margin_top = 281.0
-margin_right = 568.0
-margin_bottom = 319.0
+[node name="PC" type="PanelContainer" parent="CC"]
+margin_left = 379.0
+margin_top = 269.0
+margin_right = 645.0
+margin_bottom = 331.0
+custom_styles/panel = ExtResource( 2 )
 
-[node name="LabelDesc" type="Label" parent="CC/VC"]
-margin_right = 113.0
+[node name="VC" type="VBoxContainer" parent="CC/PC"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 258.0
+margin_bottom = 54.0
+custom_constants/separation = 12
+
+[node name="LabelDesc" type="Label" parent="CC/PC/VC"]
+margin_right = 250.0
 margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
 text = "Delete entry “%s”?"
 align = 1
 
-[node name="HC" type="HBoxContainer" parent="CC/VC"]
-margin_top = 18.0
-margin_right = 113.0
-margin_bottom = 38.0
+[node name="HC" type="HBoxContainer" parent="CC/PC/VC"]
+margin_top = 26.0
+margin_right = 250.0
+margin_bottom = 46.0
 alignment = 1
 
-[node name="ButtonDelete" type="Button" parent="CC/VC/HC"]
-margin_right = 55.0
+[node name="ButtonDelete" type="Button" parent="CC/PC/VC/HC"]
+margin_left = 68.0
+margin_right = 123.0
 margin_bottom = 20.0
 text = "Delete"
 
-[node name="ButtonCancel" type="Button" parent="CC/VC/HC"]
-margin_left = 59.0
-margin_right = 113.0
+[node name="ButtonCancel" type="Button" parent="CC/PC/VC/HC"]
+margin_left = 127.0
+margin_right = 181.0
 margin_bottom = 20.0
 text = "Cancel"
 
-[connection signal="pressed" from="CC/VC/HC/ButtonDelete" to="." method="_on_ButtonDelete_pressed"]
-[connection signal="pressed" from="CC/VC/HC/ButtonCancel" to="." method="_on_ButtonCancel_pressed"]
+[connection signal="pressed" from="CC/PC/VC/HC/ButtonDelete" to="." method="_on_ButtonDelete_pressed"]
+[connection signal="pressed" from="CC/PC/VC/HC/ButtonCancel" to="." method="_on_ButtonCancel_pressed"]
