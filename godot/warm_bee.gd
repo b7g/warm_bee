@@ -16,13 +16,15 @@ var _entry_content: Control
 onready var _opt_collections: OptionButton = $MC/HC/VC/HC/OptCollections
 onready var _entry_list: VBoxContainer = $MC/HC/VC/SCEntries/VC
 onready var _btn_add_entry: Button = $MC/HC/VC/ButtonAddEntry
-onready var _label_entry_name: Label = $MC/HC/VC2/MC/HC/LabelEntryName
+onready var _label_entry_type: Label = $MC/HC/VC2/MC/HC/LabelEntryType
+onready var _entry_name_field: Control = $MC/HC/VC2/MC/HC/EntryNameField
 onready var _btn_delete_entry: Button = $MC/HC/VC2/MC/HC/ButtonDeleteEntry
 onready var _ui_entry_content_wrap: VBoxContainer = $MC/HC/VC2
 
 
 func _ready() -> void:
 	Data.set_interface_ref(self)
+	_entry_name_field.set_interface_ref(self)
 	display_collections()
 
 
@@ -39,6 +41,13 @@ func collection_selected(collection: Dictionary) -> void:
 func entry_added(entry: Dictionary) -> void:
 	_display_entries()
 	display_entry_content(entry)
+
+
+func change_entry_name(entry_id: int, new_name: String) -> void:
+	for entry_button in _entry_list.get_children():
+		if entry_button.get_entry_id() == entry_id:
+			entry_button.change_entry_name(new_name)
+			break
 
 
 func entry_deleted() -> void:
@@ -60,7 +69,8 @@ func display_collections() -> void:
 
 func display_entry_content(entry: Dictionary) -> void:
 	_clear_entry_content()
-	_label_entry_name.text = entry["name"]
+	_label_entry_type.text = "%s:" % Structure.get_entry_type_display_names()[entry["type"]]
+	_entry_name_field.set_entry_data(entry["id"], entry["name"])
 	_btn_delete_entry.set_disabled(false)
 	if entry["type"] == Structure.ENTRY_TYPES.NOTE:
 		_entry_content = _ui_note_entry_content_res.instance()
@@ -103,7 +113,8 @@ func _display_entries() -> void:
 
 func _clear_entry_space() -> void:
 	_clear_entry_content()
-	_label_entry_name.text = "-"
+	_label_entry_type.text = "no entry selected"
+	_entry_name_field.set_entry_data(null, "")
 	_btn_delete_entry.set_disabled(true)
 
 

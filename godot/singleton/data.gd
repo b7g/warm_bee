@@ -52,6 +52,11 @@ func create_entry(e_name: String, type: int) -> void:
 	FileIO.save_data_delayed()
 
 
+func change_entry_name(new_name: String) -> void:
+	_selected_entry["name"] = new_name
+	FileIO.save_data_delayed()
+
+
 func create_tag(tag_name: String) -> String:
 	var tag_key: String = str(_get_unique_id())
 	_selected_entry["tags"][tag_key] = tag_name
