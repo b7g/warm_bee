@@ -18,7 +18,6 @@ func set_entry_data(entry_id_or_null, entry_name: String) -> void:
 
 
 func _on_EntryNameField_text_entered(new_text: String) -> void:
-	_change_entry_name(new_text)
 	release_focus()
 
 
