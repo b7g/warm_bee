@@ -17,7 +17,7 @@ func set_entry_data(entry_id_or_null, entry_name: String) -> void:
 	text = _entry_name
 
 
-func _on_EntryNameField_text_entered(new_text: String) -> void:
+func _on_EntryNameField_text_entered(_new_text: String) -> void:
 	release_focus()
 
 

@@ -14,6 +14,7 @@ onready var _label_no_result: Label = $VC/SC/VC/InfoVC/LabelNoResult
 
 
 func _ready() -> void:
+	_filter_or_create_box.grab_focus()
 	_display_tags(Data.get_tags())
 	_filter("")
 
@@ -27,16 +28,18 @@ func set_initially_selected_tags(selected_tags: Array) -> void:
 
 
 func _on_LineEditFilter_text_changed(filter_text: String) -> void:
-	_filter(filter_text.to_lower())
+	_filter(filter_text)
+
+
+func _on_LineEditFilter_text_entered(new_text: String) -> void:
+	for ui_tag in _tag_container.get_children():
+		if ui_tag.get_name().to_lower() == new_text.to_lower():
+			return
+	_create_tag(new_text)
 
 
 func _on_ButtonCreateTag_pressed() -> void:
-	var new_tag_name: String = _filter_or_create_box.text
-	var new_tag_key: String = Data.create_tag(new_tag_name)
-	_add_ui_tag(new_tag_key, new_tag_name)
-	_label_no_tags.visible = false
-	_filter_or_create_box.text = ""
-	_filter("")
+	_create_tag(_filter_or_create_box.text)
 
 
 func _display_tags(tags: Dictionary) -> void:
@@ -48,6 +51,17 @@ func _display_tags(tags: Dictionary) -> void:
 		_add_ui_tag(tag_key, tag_name, is_selected)
 
 
+func _create_tag(tag_name: String) -> void:
+	if tag_name.empty():
+		return
+	var new_tag_key: String = Data.create_tag(tag_name)
+	_add_ui_tag(new_tag_key, tag_name)
+	_label_no_tags.visible = false
+	_filter_or_create_box.text = ""
+	_filter_or_create_box.grab_focus()
+	_filter("")
+
+
 func _add_ui_tag(tag_key: String, tag_name: String, is_selected: bool = false) -> void:
 	var ui_tag: Control = _ui_tag_res.instance()
 	ui_tag.set_tag_info(tag_key, tag_name)
@@ -57,6 +71,7 @@ func _add_ui_tag(tag_key: String, tag_name: String, is_selected: bool = false) -
 
 
 func _filter(filter_text: String) -> void:
+	filter_text = filter_text.to_lower()
 	var filter_inactive: bool = filter_text.empty()
 	var tag_exists: bool = false
 	if filter_text.empty():

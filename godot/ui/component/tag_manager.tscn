@@ -98,6 +98,7 @@ margin_bottom = 20.0
 text = "Cancel"
 
 [connection signal="text_changed" from="VC/HC/LineEditFilter" to="." method="_on_LineEditFilter_text_changed"]
+[connection signal="text_entered" from="VC/HC/LineEditFilter" to="." method="_on_LineEditFilter_text_entered"]
 [connection signal="pressed" from="VC/HC/ButtonCreateTag" to="." method="_on_ButtonCreateTag_pressed"]
 [connection signal="pressed" from="VC/ButtonsHC/ButtonAdd" to="." method="_on_ButtonAdd_pressed"]
 [connection signal="pressed" from="VC/ButtonsHC/ButtonCancel" to="." method="_on_ButtonCancel_pressed"]
