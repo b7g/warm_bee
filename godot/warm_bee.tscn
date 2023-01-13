@@ -35,16 +35,22 @@ margin_right = 121.0
 margin_bottom = 29.0
 
 [node name="OptCollections" type="OptionButton" parent="MC/HC/VC/HC"]
-margin_right = 96.0
+margin_right = 71.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 disabled = true
 
 [node name="ButtonAddCollection" type="Button" parent="MC/HC/VC/HC"]
+margin_left = 75.0
+margin_right = 96.0
+margin_bottom = 29.0
+text = "+"
+
+[node name="ButtonDeleteCollection" type="Button" parent="MC/HC/VC/HC"]
 margin_left = 100.0
 margin_right = 121.0
 margin_bottom = 29.0
-text = "+"
+text = "×"
 
 [node name="Spacer" type="MarginContainer" parent="MC/HC/VC"]
 margin_top = 29.0
@@ -118,5 +124,6 @@ text = "Delete entry"
 
 [connection signal="item_selected" from="MC/HC/VC/HC/OptCollections" to="." method="_on_OptCollections_item_selected"]
 [connection signal="pressed" from="MC/HC/VC/HC/ButtonAddCollection" to="." method="_on_ButtonAddCollection_pressed"]
+[connection signal="pressed" from="MC/HC/VC/HC/ButtonDeleteCollection" to="." method="_on_ButtonDeleteCollection_pressed"]
 [connection signal="pressed" from="MC/HC/VC/ButtonAddEntry" to="." method="_on_ButtonAddEntry_pressed"]
 [connection signal="pressed" from="MC/HC/VC2/MC/HC/ButtonDeleteEntry" to="." method="_on_ButtonDeleteEntry_pressed"]

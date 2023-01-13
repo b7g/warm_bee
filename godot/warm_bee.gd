@@ -1,6 +1,7 @@
 extends Control
 
 var _dialog_add_collection_res: Resource = preload("res://ui/dialog/add_collection.tscn")
+var _dialog_delete_collection_res: Resource = preload("res://ui/dialog/delete_collection.tscn")
 var _dialog_add_entry_res: Resource = preload("res://ui/dialog/add_entry.tscn")
 var _dialog_delete_entry_res: Resource = preload("res://ui/dialog/delete_entry.tscn")
 var _dialog_ce_list_item_res: Resource = preload("res://ui/dialog/create_or_edit_list_item.tscn")
@@ -14,6 +15,7 @@ var _ui_list_entry_content_res: Resource = preload("res://ui/component/list_entr
 var _entry_content: Control
 
 onready var _opt_collections: OptionButton = $MC/HC/VC/HC/OptCollections
+onready var _btn_delete_collection: Button = $MC/HC/VC/HC/ButtonDeleteCollection
 onready var _entry_list: VBoxContainer = $MC/HC/VC/SCEntries/VC
 onready var _btn_add_entry: Button = $MC/HC/VC/ButtonAddEntry
 onready var _label_entry_type: Label = $MC/HC/VC2/MC/HC/LabelEntryType
@@ -50,6 +52,12 @@ func change_entry_name(entry_id: int, new_name: String) -> void:
 			break
 
 
+func collection_deleted() -> void:
+	display_collections()
+	_clear_entry_space()
+	_display_entries()
+
+
 func entry_deleted() -> void:
 	_display_entries()
 	_clear_entry_space()
@@ -59,8 +67,9 @@ func display_collections() -> void:
 	_opt_collections.clear()
 	var collections: Array = Data.get_collections()
 	var no_collection: bool = collections.empty()
-	_btn_add_entry.disabled = no_collection
 	_opt_collections.disabled = no_collection
+	_btn_delete_collection.disabled = no_collection
+	_btn_add_entry.disabled = no_collection
 	for collection in collections:
 		_opt_collections.add_item(collection["name"])
 		var item_index: int = _opt_collections.get_item_count() - 1
@@ -140,3 +149,9 @@ func _on_ButtonDeleteEntry_pressed() -> void:
 	var dialog_delete_entry: Control = _dialog_delete_entry_res.instance()
 	dialog_delete_entry.set_entry_name(Data.get_entry_name())
 	add_child(dialog_delete_entry)
+
+
+func _on_ButtonDeleteCollection_pressed() -> void:
+	var dialog_delete_collection: Control = _dialog_delete_collection_res.instance()
+	dialog_delete_collection.set_collection_name(Data.get_collection_name())
+	add_child(dialog_delete_collection)

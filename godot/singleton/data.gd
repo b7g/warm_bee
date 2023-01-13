@@ -13,8 +13,7 @@ func _ready() -> void:
 
 func set_interface_ref(interface: Control) -> void:
 	_interface = interface
-	if not _collections.empty():
-		_select_collection(_collections.front())
+	_select_first_collection()
 
 
 func create_collection(c_name: String) -> void:
@@ -96,7 +95,13 @@ func get_collections() -> Array:
 
 
 func get_entries_of_selected_collection() -> Array:
+	if _selected_collection.empty():
+		return []
 	return _selected_collection["entries"].duplicate()
+
+
+func get_collection_name() -> String:
+	return _selected_collection["name"]
 
 
 func get_entry_name() -> String:
@@ -131,6 +136,19 @@ func edit_list_entry_item(item_key: String, new_text: String, selected_tags: Arr
 	FileIO.save_data_delayed()
 
 
+func delete_collection() -> void:
+	var delete_collection_id: int = _selected_collection["id"]
+	for collection_index in _collections.size():
+		var collection: Dictionary = _collections[collection_index]
+		if collection["id"] == delete_collection_id:
+			_collections.remove(collection_index)
+			_selected_collection = {}
+			_select_first_collection()
+			_interface.collection_deleted()
+			FileIO.save_data_delayed()
+			break
+
+
 func delete_entry() -> void:
 	var delete_entry_id: int = _selected_entry["id"]
 	for entry_index in _selected_collection["entries"].size():
@@ -145,6 +163,11 @@ func delete_entry() -> void:
 
 func get_collection_data() -> Array:
 	return _collections.duplicate()
+
+
+func _select_first_collection() -> void:
+	if not _collections.empty():
+		_select_collection(_collections.front())
 
 
 func _select_collection(collection: Dictionary) -> void:
