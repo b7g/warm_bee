@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/component/tag_manager_tag.gd" type="Script" id=1]
+[ext_resource path="res://ui/theme_resource/name_change_line_edit_not_selected.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/theme_resource/name_change_line_edit_selected.tres" type="StyleBox" id=3]
 
 [node name="TagManagerTag" type="PanelContainer"]
 margin_right = 300.0
@@ -17,20 +19,18 @@ margin_bottom = 31.0
 margin_right = 24.0
 margin_bottom = 24.0
 
-[node name="LabelName" type="Label" parent="HC"]
+[node name="LineEditName" type="LineEdit" parent="HC"]
 margin_left = 28.0
-margin_top = 5.0
 margin_right = 286.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-text = "tag name"
-
-[node name="ButtonEdit" type="Button" parent="HC"]
-visible = false
-margin_left = 191.0
-margin_right = 227.0
 margin_bottom = 24.0
-text = "Edit"
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_uneditable = Color( 1, 1, 1, 1 )
+custom_constants/minimum_spaces = 0
+custom_styles/read_only = ExtResource( 2 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 2 )
+text = "tag name"
 
 [node name="ButtonDelete" type="Button" parent="HC"]
 visible = false
@@ -38,3 +38,6 @@ margin_left = 231.0
 margin_right = 286.0
 margin_bottom = 24.0
 text = "Delete"
+
+[connection signal="focus_exited" from="HC/LineEditName" to="." method="_on_LineEditName_focus_exited"]
+[connection signal="text_entered" from="HC/LineEditName" to="." method="_on_LineEditName_text_entered"]

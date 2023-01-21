@@ -11,7 +11,7 @@ onready var _tag_wrap: HBoxContainer = $MC/HC/TagsHC
 
 func _ready() -> void:
 	_label_text.text = _item["text"]
-	_display_tags()
+	display_tags()
 
 
 func set_interface_ref(interface: Control) -> void:
@@ -30,10 +30,10 @@ func update_content(new_text: String, tag_keys: Array) -> void:
 	_item["text"] = new_text
 	_item["tags"] = tag_keys
 	_label_text.text = new_text
-	_display_tags()
+	display_tags()
 
 
-func _display_tags() -> void:
+func display_tags() -> void:
 	for ui_tag in _tag_wrap.get_children():
 		ui_tag.queue_free()
 	for tag_key in _item["tags"]:

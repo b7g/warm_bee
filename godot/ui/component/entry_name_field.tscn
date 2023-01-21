@@ -1,19 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/component/entry_name_field.gd" type="Script" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 0.25098 )
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
-[sub_resource type="StyleBoxEmpty" id=3]
-content_margin_left = 10.0
-content_margin_right = 6.0
+[ext_resource path="res://ui/theme_resource/name_change_line_edit_not_selected.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/theme_resource/name_change_line_edit_selected.tres" type="StyleBox" id=3]
 
 [node name="EntryNameField" type="LineEdit"]
 margin_right = 29.0
@@ -22,9 +11,9 @@ rect_min_size = Vector2( 29, 0 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_uneditable = Color( 1, 1, 1, 1 )
 custom_constants/minimum_spaces = 0
-custom_styles/read_only = SubResource( 2 )
-custom_styles/focus = SubResource( 1 )
-custom_styles/normal = SubResource( 3 )
+custom_styles/read_only = ExtResource( 2 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 2 )
 expand_to_text_length = true
 context_menu_enabled = false
 script = ExtResource( 1 )

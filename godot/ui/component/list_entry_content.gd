@@ -31,6 +31,11 @@ func add_item(item_key: String, item: Dictionary) -> void:
 	_ui_item_wrap.add_child(ui_item)
 
 
+func refresh_tags() -> void:
+	for ui_item in _ui_item_wrap.get_children():
+		ui_item.display_tags()
+
+
 func _on_ButtonNewListItem_pressed() -> void:
 	var dialog_add_item: Control = _dialog_ce_list_item_res.instance()
 	dialog_add_item.set_mode(dialog_add_item.DIALOG_MODES.CREATE)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/panel_tag.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/theme_resource/panel_tag.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/component/tag.gd" type="Script" id=2]
 
 [node name="Tag" type="PanelContainer"]

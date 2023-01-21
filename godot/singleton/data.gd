@@ -75,6 +75,17 @@ func get_item_tags(item_key: String) -> Array:
 	return _selected_entry["items"][item_key]["tags"]
 
 
+func change_tag_name(tag_key: String, new_name: String) -> bool:
+	for tag_key_id in _selected_entry["tags"].keys():
+		var tag_name: String = _selected_entry["tags"][tag_key_id]
+		if tag_name.to_lower() == new_name.to_lower() and not tag_key_id == tag_key:
+			return false 
+	_selected_entry["tags"][tag_key] = new_name
+	_interface.refresh_tags()
+	FileIO.save_data_delayed()
+	return true
+
+
 func select_collection_by_id(collection_id: int) -> void:
 	for collection in Data.get_collections():
 		if collection["id"] == collection_id:

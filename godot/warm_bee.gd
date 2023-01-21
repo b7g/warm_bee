@@ -94,6 +94,10 @@ func add_list_entry_item(item_key: String, item: Dictionary) -> void:
 	_entry_content.add_item(item_key, item)
 
 
+func refresh_tags() -> void:
+	_entry_content.refresh_tags()
+
+
 func open_edit_item_dialog(item_key: String, text: String, ui_item: Control) -> void:
 	var dialog_edit_item: Control = _dialog_ce_list_item_res.instance()
 	dialog_edit_item.set_mode(dialog_edit_item.DIALOG_MODES.EDIT)
