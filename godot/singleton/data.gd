@@ -86,6 +86,20 @@ func change_tag_name(tag_key: String, new_name: String) -> bool:
 	return true
 
 
+func request_delete_tag_deletion(tag_key: String, ui_node: Control) -> void:
+	_interface.display_delete_tag_dialog(tag_key, ui_node)
+
+
+func delete_tag(tag_key: String) -> void:
+	var erased: bool = _selected_entry["tags"].erase(tag_key)
+	if not erased:
+		push_error("Could not delete tag %s (not present)" % tag_key)
+	for list_item in _selected_entry["items"].values():
+		list_item["tags"].erase(tag_key)
+	_interface.refresh_tags()
+	FileIO.save_data_delayed()
+
+
 func select_collection_by_id(collection_id: int) -> void:
 	for collection in Data.get_collections():
 		if collection["id"] == collection_id:

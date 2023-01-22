@@ -51,3 +51,7 @@ func _change_tag_name(new_name: String) -> void:
 		_tag_name = new_name
 	else:
 		_line_edit_name.set_text(_tag_name)
+
+
+func _on_ButtonDelete_pressed() -> void:
+	Data.request_delete_tag_deletion(_tag_key, self)

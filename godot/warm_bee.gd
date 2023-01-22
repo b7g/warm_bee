@@ -6,6 +6,7 @@ var _dialog_add_entry_res: Resource = preload("res://ui/dialog/add_entry.tscn")
 var _dialog_delete_entry_res: Resource = preload("res://ui/dialog/delete_entry.tscn")
 var _dialog_ce_list_item_res: Resource = preload("res://ui/dialog/create_or_edit_list_item.tscn")
 var _dialog_delete_item_res: Resource = preload("res://ui/dialog/delete_item.tscn")
+var _dialog_delete_tag_res: Resource = preload("res://ui/dialog/delete_tag.tscn")
 
 var _ui_collection_button_res: Resource = preload("res://ui/component/collection_button.tscn")
 var _ui_entry_button_res: Resource = preload("res://ui/component/entry_button.tscn")
@@ -113,6 +114,12 @@ func open_delete_item_dialog(item_key: String, ui_item: Control) -> void:
 	delete_item_dialog.set_item_key(item_key)
 	delete_item_dialog.set_ui_item_ref(ui_item)
 	add_child(delete_item_dialog)
+
+
+func display_delete_tag_dialog(tag_key: String, ui_node: Control) -> void:
+	var dialog_delete_tag: Control = _dialog_delete_tag_res.instance()
+	dialog_delete_tag.setup(tag_key, ui_node)
+	add_child(dialog_delete_tag)
 
 
 func _display_entries() -> void:
