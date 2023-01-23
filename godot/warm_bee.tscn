@@ -26,76 +26,82 @@ margin_bottom = 584.0
 custom_constants/separation = 16
 
 [node name="VC" type="VBoxContainer" parent="MC/HC"]
-margin_right = 121.0
+margin_right = 157.0
 margin_bottom = 568.0
 custom_constants/separation = 0
 
 [node name="HC" type="HBoxContainer" parent="MC/HC/VC"]
-margin_right = 121.0
+margin_right = 157.0
 margin_bottom = 29.0
 
 [node name="OptCollections" type="OptionButton" parent="MC/HC/VC/HC"]
-margin_right = 71.0
+margin_right = 29.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 disabled = true
 
-[node name="ButtonAddCollection" type="Button" parent="MC/HC/VC/HC"]
-margin_left = 75.0
-margin_right = 96.0
+[node name="ButtonRenameCollection" type="Button" parent="MC/HC/VC/HC"]
+margin_left = 33.0
+margin_right = 107.0
 margin_bottom = 29.0
-text = "+"
+text = "Rename"
 
 [node name="ButtonDeleteCollection" type="Button" parent="MC/HC/VC/HC"]
-margin_left = 100.0
-margin_right = 121.0
+margin_left = 111.0
+margin_right = 132.0
 margin_bottom = 29.0
 text = "×"
 
+[node name="ButtonAddCollection" type="Button" parent="MC/HC/VC/HC"]
+margin_left = 136.0
+margin_right = 157.0
+margin_bottom = 29.0
+text = "+"
+
 [node name="Spacer" type="MarginContainer" parent="MC/HC/VC"]
 margin_top = 29.0
-margin_right = 121.0
+margin_right = 157.0
 margin_bottom = 45.0
 custom_constants/margin_top = 16
 
 [node name="ButtonAddEntry" type="Button" parent="MC/HC/VC"]
 margin_top = 45.0
-margin_right = 121.0
+margin_right = 157.0
 margin_bottom = 74.0
 disabled = true
 text = "Add new entry"
 
 [node name="Spacer2" type="MarginContainer" parent="MC/HC/VC"]
 margin_top = 74.0
-margin_right = 121.0
+margin_right = 157.0
 margin_bottom = 82.0
 custom_constants/margin_top = 8
 
 [node name="SCEntries" type="ScrollContainer" parent="MC/HC/VC"]
 margin_top = 82.0
-margin_right = 121.0
+margin_right = 157.0
 margin_bottom = 568.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VC" type="VBoxContainer" parent="MC/HC/VC/SCEntries"]
-margin_right = 121.0
+margin_right = 157.0
 size_flags_horizontal = 3
 
 [node name="VC2" type="VBoxContainer" parent="MC/HC"]
-margin_left = 137.0
+margin_left = 173.0
 margin_right = 992.0
 margin_bottom = 568.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="MC" type="MarginContainer" parent="MC/HC/VC2"]
-margin_right = 855.0
+margin_right = 819.0
 margin_bottom = 45.0
 custom_constants/margin_bottom = 16
 
 [node name="HC" type="HBoxContainer" parent="MC/HC/VC2/MC"]
-margin_right = 855.0
+margin_right = 819.0
 margin_bottom = 29.0
 
 [node name="LabelEntryType" type="Label" parent="MC/HC/VC2/MC/HC"]
@@ -111,19 +117,20 @@ margin_right = 145.0
 
 [node name="Spacer" type="Control" parent="MC/HC/VC2/MC/HC"]
 margin_left = 149.0
-margin_right = 746.0
+margin_right = 710.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 
 [node name="ButtonDeleteEntry" type="Button" parent="MC/HC/VC2/MC/HC"]
-margin_left = 750.0
-margin_right = 855.0
+margin_left = 714.0
+margin_right = 819.0
 margin_bottom = 29.0
 disabled = true
 text = "Delete entry"
 
 [connection signal="item_selected" from="MC/HC/VC/HC/OptCollections" to="." method="_on_OptCollections_item_selected"]
-[connection signal="pressed" from="MC/HC/VC/HC/ButtonAddCollection" to="." method="_on_ButtonAddCollection_pressed"]
+[connection signal="pressed" from="MC/HC/VC/HC/ButtonRenameCollection" to="." method="_on_ButtonRenameCollection_pressed"]
 [connection signal="pressed" from="MC/HC/VC/HC/ButtonDeleteCollection" to="." method="_on_ButtonDeleteCollection_pressed"]
+[connection signal="pressed" from="MC/HC/VC/HC/ButtonAddCollection" to="." method="_on_ButtonAddCollection_pressed"]
 [connection signal="pressed" from="MC/HC/VC/ButtonAddEntry" to="." method="_on_ButtonAddEntry_pressed"]
 [connection signal="pressed" from="MC/HC/VC2/MC/HC/ButtonDeleteEntry" to="." method="_on_ButtonDeleteEntry_pressed"]

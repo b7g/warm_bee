@@ -5,6 +5,7 @@ var _dialog_delete_collection_res: Resource = preload("res://ui/dialog/delete_co
 var _dialog_add_entry_res: Resource = preload("res://ui/dialog/add_entry.tscn")
 var _dialog_delete_entry_res: Resource = preload("res://ui/dialog/delete_entry.tscn")
 var _dialog_ce_list_item_res: Resource = preload("res://ui/dialog/create_or_edit_list_item.tscn")
+var _dialog_rename_collection_res: Resource = preload("res://ui/dialog/rename_collection_dialog.tscn")
 var _dialog_delete_item_res: Resource = preload("res://ui/dialog/delete_item.tscn")
 var _dialog_delete_tag_res: Resource = preload("res://ui/dialog/delete_tag.tscn")
 
@@ -75,6 +76,10 @@ func display_collections() -> void:
 		_opt_collections.add_item(collection["name"])
 		var item_index: int = _opt_collections.get_item_count() - 1
 		_opt_collections.set_item_metadata(item_index, collection["id"])
+
+
+func collection_renamed_to(new_name: String) -> void:
+	_opt_collections.set_item_text(_opt_collections.selected, new_name)
 
 
 func display_entry_content(entry: Dictionary) -> void:
@@ -154,6 +159,12 @@ func _on_ButtonAddCollection_pressed() -> void:
 
 func _on_ButtonAddEntry_pressed() -> void:
 	add_child(_dialog_add_entry_res.instance())
+
+
+func _on_ButtonRenameCollection_pressed() -> void:
+	var dialog_rename_collection: Control = _dialog_rename_collection_res.instance()
+	dialog_rename_collection.set_collection_name(Data.get_collection_name())
+	add_child(dialog_rename_collection)
 
 
 func _on_ButtonDeleteEntry_pressed() -> void:

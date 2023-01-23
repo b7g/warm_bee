@@ -161,6 +161,12 @@ func edit_list_entry_item(item_key: String, new_text: String, selected_tags: Arr
 	FileIO.save_data_delayed()
 
 
+func rename_collection(new_name: String) -> void:
+	_selected_collection["name"] = new_name
+	_interface.collection_renamed_to(new_name)
+	FileIO.save_data_delayed()
+
+
 func delete_collection() -> void:
 	var delete_collection_id: int = _selected_collection["id"]
 	for collection_index in _collections.size():
