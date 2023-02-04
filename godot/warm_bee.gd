@@ -22,6 +22,7 @@ onready var _entry_list: VBoxContainer = $MC/HC/VC/SCEntries/VC
 onready var _btn_add_entry: Button = $MC/HC/VC/ButtonAddEntry
 onready var _label_entry_type: Label = $MC/HC/VC2/MC/HC/LabelEntryType
 onready var _entry_name_field: Control = $MC/HC/VC2/MC/HC/EntryNameField
+onready var _btn_rename_collection: Button = $MC/HC/VC/HC/ButtonRenameCollection
 onready var _btn_delete_entry: Button = $MC/HC/VC2/MC/HC/ButtonDeleteEntry
 onready var _ui_entry_content_wrap: VBoxContainer = $MC/HC/VC2
 
@@ -70,6 +71,7 @@ func display_collections() -> void:
 	var collections: Array = Data.get_collections()
 	var no_collection: bool = collections.empty()
 	_opt_collections.disabled = no_collection
+	_btn_rename_collection.disabled = no_collection
 	_btn_delete_collection.disabled = no_collection
 	_btn_add_entry.disabled = no_collection
 	for collection in collections:
